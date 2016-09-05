@@ -65,20 +65,9 @@ In that case, in order to still have access to the assets under `WebKeys.package
 ```
 lazy val server = (project in file("server")).settings(
 ...
-WebKeys.packagePrefix in Assets := "public/"
-WebKeys.exportedMappings in Assets ++= replacePathPrefix(
-    (WebKeys.exportedMappings in Assets).value,
-    SbtWeb.webJarsPathPrefix.value,
-    (WebKeys.packagePrefix in Assets).value)
+WebKeys.packagePrefix in Assets := "public/",
+WebKeys.exportedMappings in Assets ++= (for ((file, path) <- (mappings in Assets).value)
+  yield file -> ((WebKeys.packagePrefix in Assets).value + path)),
 ...
 )
-
-def replacePathPrefix(mappings: Seq[PathMapping], fromPrefix: String, toPrefix: String) = {
-  for ((file, path) <- mappings) yield {
-    val updatedPath = if (path.startsWith(fromPrefix)) {
-      path.replaceFirst(fromPrefix, toPrefix)
-    } else path
-    file -> updatedPath
-  }
-}
 ```

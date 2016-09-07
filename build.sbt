@@ -4,8 +4,8 @@ lazy val server = (project in file("server")).settings(
   scalaVersion := scalaV,
   scalaJSProjects := Seq(client),
   pipelineStages in Assets := Seq(scalaJSPipeline),
-  // triggers scalaJSPipeline when using compile, ~compile, ~run
-  compile in Compile <<= (compile in Compile).dependsOn(scalaJSPipeline.map(f => f(Seq.empty))),
+  // triggers scalaJSPipeline when using compile or continuous compilation
+  compile in Compile <<= (compile in Compile) dependsOn scalaJSPipeline,
   libraryDependencies ++= Seq(
     "com.typesafe.akka" %% "akka-http-experimental" % "2.4.9",
     "com.vmunier" %% "scalajs-scripts" % "1.0.0"

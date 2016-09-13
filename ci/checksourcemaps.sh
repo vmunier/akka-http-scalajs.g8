@@ -21,4 +21,8 @@ sbt universal:packageBin "set emitSourceMaps in (client, fullOptJS) := true" "se
 countScalaFiles
 nbScalaFilesWithSourceMaps=$?
 
+echo "-- RESULTS --"
+echo "Number of Scala files with source maps disabled: $nbScalaFilesNoSourceMaps (0 expected)"
+echo "Number of Scala files with source maps enabled: $nbScalaFilesWithSourceMaps (>0 expected)"
+
 [ "$nbScalaFilesNoSourceMaps" -eq "0" ] && [ "$nbScalaFilesWithSourceMaps" -gt "0" ]

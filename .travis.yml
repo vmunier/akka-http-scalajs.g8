@@ -14,8 +14,7 @@ before_cache:
   - find $HOME/.sbt        -name "*.lock"               -print -delete
 
 script:
-  - sbt compile
-  - sbt universal:packageBin
+  - ci/checksourcemaps.sh
 
 notifications:
   email:

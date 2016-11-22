@@ -1,4 +1,4 @@
-val scalaV = "2.11.8"
+val scalaV = "2.12.0"
 
 lazy val server = (project in file("server")).settings(
   scalaVersion := scalaV,
@@ -7,8 +7,8 @@ lazy val server = (project in file("server")).settings(
   // triggers scalaJSPipeline when using compile or continuous compilation
   compile in Compile <<= (compile in Compile) dependsOn scalaJSPipeline,
   libraryDependencies ++= Seq(
-    "com.typesafe.akka" %% "akka-http-experimental" % "2.4.10",
-    "com.vmunier" %% "scalajs-scripts" % "1.0.0"
+    "com.typesafe.akka" %% "akka-http" % "10.0.0",
+    "com.vmunier" %% "scalajs-scripts" % "1.1.0"
   ),
   WebKeys.packagePrefix in Assets := "public/",
   managedClasspath in Runtime += (packageBin in Assets).value,

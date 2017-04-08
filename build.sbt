@@ -1,13 +1,13 @@
-val scalaV = "2.12.0"
+val scalaV = "2.12.1"
 
 lazy val server = (project in file("server")).settings(
   scalaVersion := scalaV,
   scalaJSProjects := Seq(client),
   pipelineStages in Assets := Seq(scalaJSPipeline),
   // triggers scalaJSPipeline when using compile or continuous compilation
-  compile in Compile <<= (compile in Compile) dependsOn scalaJSPipeline,
+  compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value,
   libraryDependencies ++= Seq(
-    "com.typesafe.akka" %% "akka-http" % "10.0.0",
+    "com.typesafe.akka" %% "akka-http" % "10.0.5",
     "com.vmunier" %% "scalajs-scripts" % "1.1.0"
   ),
   WebKeys.packagePrefix in Assets := "public/",
@@ -19,8 +19,7 @@ lazy val server = (project in file("server")).settings(
 
 lazy val client = (project in file("client")).settings(
   scalaVersion := scalaV,
-  persistLauncher := true,
-  persistLauncher in Test := false,
+  scalaJSUseMainModuleInitializer := true,
   libraryDependencies ++= Seq(
     "org.scala-js" %%% "scalajs-dom" % "0.9.1"
   )

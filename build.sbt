@@ -7,7 +7,7 @@ lazy val server = (project in file("server")).settings(
   // triggers scalaJSPipeline when using compile or continuous compilation
   compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value,
   libraryDependencies ++= Seq(
-    "com.typesafe.akka" %% "akka-http" % "10.0.7",
+    "com.typesafe.akka" %% "akka-http" % "10.0.10",
     "com.vmunier" %% "scalajs-scripts" % "1.1.0"
   ),
   WebKeys.packagePrefix in Assets := "public/",
@@ -21,7 +21,7 @@ lazy val client = (project in file("client")).settings(
   scalaVersion := scalaV,
   scalaJSUseMainModuleInitializer := true,
   libraryDependencies ++= Seq(
-    "org.scala-js" %%% "scalajs-dom" % "0.9.1"
+    "org.scala-js" %%% "scalajs-dom" % "0.9.3"
   )
 ).enablePlugins(ScalaJSPlugin, ScalaJSWeb).
   dependsOn(sharedJs)
@@ -33,4 +33,4 @@ lazy val sharedJvm = shared.jvm
 lazy val sharedJs = shared.js
 
 // loads the server project at sbt startup
-onLoad in Global := (Command.process("project server", _: State)) compose (onLoad in Global).value
+onLoad in Global := (onLoad in Global).value andThen {s: State => "project server" :: s}

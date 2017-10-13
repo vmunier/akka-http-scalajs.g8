@@ -1,4 +1,4 @@
-package example
+package $package$
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
@@ -18,6 +18,6 @@ object WebServer {
 
     Http().bindAndHandle(service.route, interface, port)
 
-    println(s"Server online at http://$interface:$port")
+    println(s"Server online at http://\$interface:\$port")
   }
 }

@@ -1,6 +1,0 @@
-{
-  "name": "Akka HTTP with Scala.js",
-  "description": "Simple example application showing how you can integrate an Akka HTTP project with a Scala.js project.",
-  "website": "https://github.com/vmunier/akka-http-with-scalajs-example",
-  "success_url": "/"
-}

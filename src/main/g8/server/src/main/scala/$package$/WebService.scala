@@ -1,7 +1,8 @@
-package example
+package $package$
 
 import akka.http.scaladsl.server.Directives
-import shared.SharedMessages
+import $package$.shared.SharedMessages
+import $package$.twirl.Implicits._
 
 class WebService() extends Directives {
 
@@ -9,7 +10,7 @@ class WebService() extends Directives {
     pathSingleSlash {
       get {
         complete {
-          example.html.index.render(SharedMessages.itWorks)
+          $package$.html.index.render(SharedMessages.itWorks)
         }
       }
     } ~

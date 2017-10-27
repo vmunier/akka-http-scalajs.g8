@@ -1,21 +1,23 @@
 # Akka HTTP with Scala.js
 
 [![License](http://img.shields.io/:license-Apache%202-red.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-This is a simple example application showing how you can integrate an Akka HTTP project with a Scala.js project.
+This is a [Giter8](http://www.foundweekends.org/giter8/) template showing how you can integrate an Akka HTTP project with a Scala.js project.
+
+## Run the application
+
+```shell
+$ sbt new vmunier/akka-http-scalajs.g8 --name=akka-http-scalajs --organization=com.example
+$ cd akka-http-scalajs
+$ sbt
+> ~re-start
+$ open http://0.0.0.0:8080
+```
 
 The application contains three directories:
 * `server` Akka HTTP application (server side)
 * `client` Scala.js application (client side)
 * `shared` Scala code that you want to share between the server and the client
-
-## Run the application
-```shell
-$ sbt
-> ~re-start
-$ open http://0.0.0.0:8080
-```
 
 ## Features
 
@@ -31,24 +33,25 @@ The application uses the [sbt-web-scalajs](https://github.com/vmunier/sbt-web-sc
 ## Cleaning
 
 The root project aggregates all the other projects by default.
-Use this root project, called `akka-http-with-scalajs-example`, to clean all the projects at once.
+Use this root project, called `akka-http-scalajs`, to clean all the projects at once.
 ```shell
 $ sbt
-> akka-http-with-scalajs-example/clean
+> akka-http-scalajs/clean
 ```
 
 ## IDE integration
-
-### Eclipse
-
-1. `$ sbt "eclipse with-source=true"`
-2. Inside Eclipse, `File/Import/General/Existing project...`, choose the root folder. Uncheck the first and the last checkboxes to only import client, server and one shared, click `Finish`. ![Alt text](screenshots/eclipse-akka-http-with-scalajs-example.png?raw=true "eclipse akka-http-with-scalajs-example screenshot")
 
 ### IntelliJ
 
 In IntelliJ, open Project wizard, select `Import Project`, choose the root folder and click `OK`.
 Select `Import project from external model` option, choose `SBT project` and click `Next`. Select additional import options and click `Finish`.
-Make sure you use the IntelliJ Scala Plugin v1.3.3 or higher. There are known issues with prior versions of the plugin.
+Make sure you use the IntelliJ Scala Plugin v2017.2.7 or higher. There are known issues with prior versions of the plugin.
+
+### Eclipse
+
+1. `$ sbt "eclipse with-source=true"`
+2. Inside Eclipse, `File/Import/General/Existing project...`, choose the root folder. Uncheck the third checkbox to only import client, server and shared/.jvm, click `Finish`. ![Alt text](screenshots/eclipse-akka-http-scalajs.png?raw=true "eclipse akka-http-scalajs screenshot")
+
 
 ## Classpath during development
 

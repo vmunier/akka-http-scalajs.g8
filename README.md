@@ -10,8 +10,8 @@ This is a [Giter8](http://www.foundweekends.org/giter8/) template showing how yo
 $ sbt new vmunier/akka-http-scalajs.g8 --name=akka-http-scalajs --organization=com.example
 $ cd akka-http-scalajs
 $ sbt
-> ~re-start
-$ open http://0.0.0.0:8080
+> ~reStart
+$ open http://localhost:8080
 ```
 
 The application contains three directories:
@@ -23,8 +23,8 @@ The application contains three directories:
 
 The application uses the [sbt-web-scalajs](https://github.com/vmunier/sbt-web-scalajs) sbt plugin and the [scalajs-scripts](https://github.com/vmunier/scalajs-scripts) library.
 
-- `compile`, `run`, `re-start` trigger the Scala.js fastOptJS command
-- `~compile`, `~run`, `~re-start` continuous compilation is also available
+- `compile`, `run`, `reStart` trigger the Scala.js fastOptJS command
+- `~compile`, `~run`, `~reStart` continuous compilation is also available
 - Production archives (e.g. using `assembly`, `universal:packageBin`) contain the optimised javascript
 - Source maps
   - Open your browser dev tool to set breakpoints or to see the guilty line of code when an exception is thrown

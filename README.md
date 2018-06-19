@@ -7,7 +7,7 @@ This is a [Giter8](http://www.foundweekends.org/giter8/) template showing how yo
 ## Run the application
 
 ```shell
-$ sbt new vmunier/akka-http-scalajs.g8 --name=akka-http-scalajs --organization=com.example
+$ sbt new vmunier/akka-http-scalajs.g8
 $ cd akka-http-scalajs
 $ sbt
 > ~reStart

@@ -12,3 +12,4 @@ addSbtPlugin("com.eed3si9n"              % "sbt-assembly"              % "0.14.7
 addSbtPlugin("com.typesafe.sbt"          % "sbt-native-packager"       % "1.3.5")
 addSbtPlugin("com.typesafe.sbteclipse"   % "sbteclipse-plugin"         % "5.2.4")
 addSbtPlugin("com.typesafe.sbt"          % "sbt-twirl"                 % "1.3.15")
+addSbtPlugin("org.portable-scala"        % "sbt-scalajs-crossproject"  % "0.5.0")

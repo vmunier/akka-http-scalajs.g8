@@ -10,6 +10,7 @@ This is a [Giter8](http://www.foundweekends.org/giter8/) template showing how yo
 $ sbt new vmunier/akka-http-scalajs.g8
 $ cd akka-http-scalajs
 $ sbt
+> project server
 > ~reStart
 $ open http://localhost:8080
 ```
@@ -32,11 +33,10 @@ The application uses the [sbt-web-scalajs](https://github.com/vmunier/sbt-web-sc
 
 ## Cleaning
 
-The root project aggregates all the other projects by default.
-Use this root project, called `akka-http-scalajs`, to clean all the projects at once.
+The root project aggregates all the other projects by default. Use this root project to clean all the projects at once.
 ```shell
 $ sbt
-> akka-http-scalajs/clean
+> clean
 ```
 
 ## IDE integration

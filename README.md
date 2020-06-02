@@ -27,7 +27,7 @@ The application uses the [sbt-web-scalajs](https://github.com/vmunier/sbt-web-sc
 - `compile`, `run`, `reStart` trigger the Scala.js `fastOptJS` task
 - `~compile`, `~run`, `~reStart` continuous compilation is also available
 - Set `scalaJSStage` to `FullOptStage` when packaging your application for `fullOptJS` to be executed instead of `fastOptJS`:
-  ```scala
+  ```
   sbt 'set scalaJSStage in Global := FullOptStage' universal:packageBin
   ```
 - Source maps

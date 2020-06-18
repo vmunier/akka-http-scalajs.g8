@@ -11,9 +11,7 @@ lazy val server = project
       "com.vmunier" %% "scalajs-scripts" % "1.1.4"
     ),
     WebKeys.packagePrefix in Assets := "public/",
-    managedClasspath in Runtime += (packageBin in Assets).value,
-    // Compile the project before generating Eclipse files, so that generated .scala or .class files for Twirl templates are present
-    EclipseKeys.preTasks := Seq(compile in Compile)
+    managedClasspath in Runtime += (packageBin in Assets).value
   )
   .enablePlugins(SbtWeb, SbtTwirl, JavaAppPackaging)
   .dependsOn(sharedJvm)

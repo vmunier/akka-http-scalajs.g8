@@ -7,7 +7,7 @@ lazy val server = project
     compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value,
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-http" % "10.2.0",
-      "com.typesafe.akka" %% "akka-stream" % "2.6.8",
+      "com.typesafe.akka" %% "akka-stream" % "2.6.9",
       "com.vmunier" %% "scalajs-scripts" % "1.1.4"
     ),
     WebKeys.packagePrefix in Assets := "public/",
@@ -21,7 +21,7 @@ lazy val client = project
   .settings(
     scalaJSUseMainModuleInitializer := true,
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "1.0.0"
+      "org.scala-js" %%% "scalajs-dom" % "1.1.0"
     )
   )
   .enablePlugins(ScalaJSPlugin, ScalaJSWeb)

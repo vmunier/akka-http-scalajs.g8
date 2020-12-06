@@ -6,8 +6,8 @@ lazy val server = project
     // triggers scalaJSPipeline when using compile or continuous compilation
     compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value,
     libraryDependencies ++= Seq(
-      "com.typesafe.akka" %% "akka-http" % "10.2.0",
-      "com.typesafe.akka" %% "akka-stream" % "2.6.10",
+      "com.typesafe.akka" %% "akka-http" % "10.2.1",
+      "com.typesafe.akka" %% "akka-stream" % "2.6.9",
       "com.vmunier" %% "scalajs-scripts" % "1.1.4"
     ),
     WebKeys.packagePrefix in Assets := "public/",

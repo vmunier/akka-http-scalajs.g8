@@ -7,7 +7,7 @@ lazy val server = project
     compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value,
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-http" % "10.2.2",
-      "com.typesafe.akka" %% "akka-stream" % "2.6.10",
+      "com.typesafe.akka" %% "akka-stream" % "2.6.13",
       "com.vmunier" %% "scalajs-scripts" % "1.1.4"
     ),
     WebKeys.packagePrefix in Assets := "public/",

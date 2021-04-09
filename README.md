@@ -34,6 +34,14 @@ The application uses the [sbt-web-scalajs](https://github.com/vmunier/sbt-web-sc
   - Open your browser dev tool to set breakpoints or to see the guilty line of code when an exception is thrown.
   - Source Maps are enabled in both `fastOptJS` and `fullOptJS` by default. If you wish to disable Source Maps in `fullOptJS`, then add `Compile / fullOptJS / scalaJSLinkerConfig ~= (_.withSourceMap(false))` in the Scala.js projects.
 
+## Cleaning
+
+The `root` project aggregates all the other projects. Use this root project to clean all the projects at once.
+```shell
+$ sbt
+sbt:root> clean
+```
+
 ## Load the server project at sbt startup
 
 Add the following line to `build.sbt` if you wish to load the server project at sbt startup:
@@ -41,13 +49,7 @@ Add the following line to `build.sbt` if you wish to load the server project at 
 Global / onLoad := (Global / onLoad).value.andThen(state => "project server" :: state)
 ```
 
-## Cleaning
-
-The root project aggregates all the other projects by default. Use this root project to clean all the projects at once.
-```shell
-$ sbt
-> clean
-```
+`clean` will only delete the server's generated files (in the `server/target` directory). Call `root/clean` to delete the generated files for all the projects.
 
 ## IDE integration
 

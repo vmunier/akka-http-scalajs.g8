@@ -28,26 +28,28 @@ The application uses the [sbt-web-scalajs](https://github.com/vmunier/sbt-web-sc
 - `~compile`, `~run`, `~reStart` continuous compilation is also available
 - Set `scalaJSStage` to `FullOptStage` when packaging your application for `fullOptJS` to be executed instead of `fastOptJS`:
   ```
-  sbt 'set scalaJSStage in Global := FullOptStage' universal:packageBin
+  sbt 'set Global / scalaJSStage := FullOptStage' universal:packageBin
   ```
 - Source maps
   - Open your browser dev tool to set breakpoints or to see the guilty line of code when an exception is thrown.
-  - Source Maps are enabled in both `fastOptJS` and `fullOptJS` by default. If you wish to disable Source Maps in `fullOptJS`, then add `scalaJSLinkerConfig in (Compile, fullOptJS) ~= (_.withSourceMap(false))` in the Scala.js projects.
+  - Source Maps are enabled in both `fastOptJS` and `fullOptJS` by default. If you wish to disable Source Maps in `fullOptJS`, then add `Compile / fullOptJS / scalaJSLinkerConfig ~= (_.withSourceMap(false))` in the Scala.js projects.
+
+## Cleaning
+
+The `root` project aggregates all the other projects. Use this root project to clean all the projects at once.
+```shell
+$ sbt
+sbt:root> clean
+```
 
 ## Load the server project at sbt startup
 
 Add the following line to `build.sbt` if you wish to load the server project at sbt startup:
 ```scala
-onLoad in Global := (onLoad in Global).value.andThen(state => "project server" :: state)
+Global / onLoad := (Global / onLoad).value.andThen(state => "project server" :: state)
 ```
 
-## Cleaning
-
-The root project aggregates all the other projects by default. Use this root project to clean all the projects at once.
-```shell
-$ sbt
-> clean
-```
+`clean` will only delete the server's generated files (in the `server/target` directory). Call `root/clean` to delete the generated files for all the projects.
 
 ## IDE integration
 
@@ -63,7 +65,7 @@ Make sure you use the IntelliJ Scala Plugin v2017.2.7 or higher. There are known
 2. Add the following lines to the `server`'s settings in `build.sbt`:
 ```
 // Compile the project before generating Eclipse files, so that generated .scala or .class files for Twirl templates are present
-EclipseKeys.preTasks := Seq(compile in Compile)
+EclipseKeys.preTasks := Seq(Compile / compile)
 ```
 3. Run `$ sbt "eclipse with-source=true"`
 4. Inside Eclipse, `File/Import/General/Existing project...`, choose the root folder. Uncheck the third checkbox to only import client, server and shared/.jvm, click `Finish`. ![Alt text](screenshots/eclipse-akka-http-scalajs.png?raw=true "eclipse akka-http-scalajs screenshot")
@@ -72,20 +74,20 @@ EclipseKeys.preTasks := Seq(compile in Compile)
 
 The assets (js files, sourcemaps, etc.) are added to the classpath during development thanks to the following lines:
 ```
-WebKeys.packagePrefix in Assets := "public/",
-managedClasspath in Runtime += (packageBin in Assets).value
+Assets / WebKeys.packagePrefix := "public/",
+Runtime / managedClasspath += (Assets / packageBin).value
 ```
 
-Note that `packageBin in Assets` also executes any tasks appended to `pipelineStages`, e.g. `gzip`.
+Note that `Assets / packageBin` also executes any tasks appended to `pipelineStages`, e.g. `gzip`.
 You may want to avoid executing tasks under `pipelineStages` during development, because it could take long to execute.
 
-In that case, in order to still have access to the assets under `WebKeys.packagePrefix in Assets` during development, you can use the following code instead:
+In that case, in order to still have access to the assets under `Assets / WebKeys.packagePrefix` during development, you can use the following code instead:
 ```
 lazy val server = (project in file("server")).settings(
 ...
-WebKeys.packagePrefix in Assets := "public/",
-WebKeys.exportedMappings in Assets ++= (for ((file, path) <- (mappings in Assets).value)
-  yield file -> ((WebKeys.packagePrefix in Assets).value + path)),
+Assets / WebKeys.packagePrefix := "public/",
+Assets / WebKeys.exportedMappings ++= (for ((file, path) <- (Assets / mappings).value)
+  yield file -> ((Assets / WebKeys.packagePrefix).value + path)),
 ...
 )
 ```

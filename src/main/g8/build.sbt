@@ -1,23 +1,28 @@
+ThisBuild / organization := "$organization$"
+ThisBuild / scalaVersion := "2.13.4"
+ThisBuild / version      := "0.1.0-SNAPSHOT"
+
+lazy val root = (project in file("."))
+  .aggregate(server, client, sharedJvm, sharedJs)
+
 lazy val server = project
-  .settings(commonSettings)
   .settings(
     scalaJSProjects := Seq(client),
-    pipelineStages in Assets := Seq(scalaJSPipeline),
+    Assets / pipelineStages := Seq(scalaJSPipeline),
     // triggers scalaJSPipeline when using compile or continuous compilation
-    compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value,
+    Compile / compile := ((Compile / compile) dependsOn scalaJSPipeline).value,
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-http" % "10.2.2",
       "com.typesafe.akka" %% "akka-stream" % "2.6.10",
       "com.vmunier" %% "scalajs-scripts" % "1.1.4"
     ),
-    WebKeys.packagePrefix in Assets := "public/",
-    managedClasspath in Runtime += (packageBin in Assets).value
+    Assets / WebKeys.packagePrefix := "public/",
+    Runtime / managedClasspath += (Assets / packageBin).value
   )
   .enablePlugins(SbtWeb, SbtTwirl, JavaAppPackaging)
   .dependsOn(sharedJvm)
 
 lazy val client = project
-  .settings(commonSettings)
   .settings(
     scalaJSUseMainModuleInitializer := true,
     libraryDependencies ++= Seq(
@@ -30,12 +35,6 @@ lazy val client = project
 lazy val shared = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure)
   .in(file("shared"))
-  .settings(commonSettings)
   .jsConfigure(_.enablePlugins(ScalaJSWeb))
 lazy val sharedJvm = shared.jvm
 lazy val sharedJs = shared.js
-
-lazy val commonSettings = Seq(
-  scalaVersion := "2.13.1",
-  organization := "$organization$"
-)

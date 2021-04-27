@@ -10,8 +10,8 @@ This is a [Giter8](http://www.foundweekends.org/giter8/) template showing how yo
 $ sbt new vmunier/akka-http-scalajs.g8
 $ cd akka-http-scalajs
 $ sbt
-> project server
-> ~reStart
+sbt:root> project server
+sbt:server> ~reStart
 $ open http://localhost:8080
 ```
 
@@ -83,7 +83,7 @@ You may want to avoid executing tasks under `pipelineStages` during development,
 
 In that case, in order to still have access to the assets under `Assets / WebKeys.packagePrefix` during development, you can use the following code instead:
 ```
-lazy val server = (project in file("server")).settings(
+lazy val server = project.settings(
 ...
 Assets / WebKeys.packagePrefix := "public/",
 Assets / WebKeys.exportedMappings ++= (for ((file, path) <- (Assets / mappings).value)

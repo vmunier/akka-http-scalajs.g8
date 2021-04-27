@@ -22,17 +22,17 @@ The application contains three directories:
 
 ## Features
 
-The application uses the [sbt-web-scalajs](https://github.com/vmunier/sbt-web-scalajs) sbt plugin and the [scalajs-scripts](https://github.com/vmunier/scalajs-scripts) library.
+The application uses the [sbt-web-scalajs](https://github.com/vmunier/sbt-web-scalajs) sbt plugin.
 
-- `compile`, `run`, `reStart` trigger the Scala.js `fastOptJS` task
+- `compile`, `run`, `reStart` trigger the Scala.js `fastLinkJS` task
 - `~compile`, `~run`, `~reStart` continuous compilation is also available
-- Set `scalaJSStage` to `FullOptStage` when packaging your application for `fullOptJS` to be executed instead of `fastOptJS`:
+- Set `scalaJSStage` to `FullOptStage` when packaging your application for `fullLinkJS` to be executed instead of `fastLinkJS`:
   ```
-  sbt 'set Global / scalaJSStage := FullOptStage' universal:packageBin
+  sbt 'set Global / scalaJSStage := FullOptStage' Universal/packageBin
   ```
 - Source maps
   - Open your browser dev tool to set breakpoints or to see the guilty line of code when an exception is thrown.
-  - Source Maps are enabled in both `fastOptJS` and `fullOptJS` by default. If you wish to disable Source Maps in `fullOptJS`, then add `Compile / fullOptJS / scalaJSLinkerConfig ~= (_.withSourceMap(false))` in the Scala.js projects.
+  - Source Maps are enabled in both `fastLinkJS` and `fullLinkJS` by default. If you wish to disable Source Maps in `fullLinkJS`, then add `Compile / fullLinkJS / scalaJSLinkerConfig ~= (_.withSourceMap(false))` in the Scala.js projects.
 
 ## Cleaning
 

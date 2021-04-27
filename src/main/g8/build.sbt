@@ -3,7 +3,7 @@ ThisBuild / scalaVersion := "2.13.5"
 ThisBuild / version      := "0.1.0-SNAPSHOT"
 
 lazy val root = (project in file("."))
-  .aggregate(server, client, sharedJvm, sharedJs)
+  .aggregate(server, client, shared.jvm, shared.js)
 
 lazy val server = project
   .settings(
@@ -20,7 +20,7 @@ lazy val server = project
     Runtime / managedClasspath += (Assets / packageBin).value
   )
   .enablePlugins(SbtWeb, SbtTwirl, JavaAppPackaging)
-  .dependsOn(sharedJvm)
+  .dependsOn(shared.jvm)
 
 lazy val client = project
   .settings(
@@ -30,11 +30,9 @@ lazy val client = project
     )
   )
   .enablePlugins(ScalaJSPlugin, ScalaJSWeb)
-  .dependsOn(sharedJs)
+  .dependsOn(shared.js)
 
 lazy val shared = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure)
   .in(file("shared"))
   .jsConfigure(_.enablePlugins(ScalaJSWeb))
-lazy val sharedJvm = shared.jvm
-lazy val sharedJs = shared.js

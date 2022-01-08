@@ -6,5 +6,5 @@ enablePlugins(ScriptedPlugin)
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http" % "10.2.7",
   "com.typesafe.akka" %% "akka-stream" % "2.6.18",
-  "org.scala-js" %%% "scalajs-dom" % "1.2.0"
+  "org.scala-js" %%% "scalajs-dom" % "2.1.0"
 )

@@ -17,7 +17,7 @@ lazy val server = project
       "com.vmunier" %% "scalajs-scripts" % "1.2.0"
     ),
     Assets / WebKeys.packagePrefix := "public/",
-    Runtime / managedClasspath += (Assets / packageBin).value
+    Runtime / unmanagedClasspath += (Assets / packageBin).value
   )
   .enablePlugins(SbtWeb, SbtTwirl, JavaAppPackaging)
   .dependsOn(shared.jvm)

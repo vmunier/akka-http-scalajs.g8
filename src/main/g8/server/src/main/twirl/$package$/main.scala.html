@@ -8,6 +8,10 @@
   </head>
   <body>
     @content
-    @scalajs.html.scripts("client", name => s"/assets/$name", name => getClass.getResource(s"/public/$name") != null)
+    @scalajs.html.scripts("client",
+      name => {
+        val versionedJs = VersionedResourceFinder.findAssetPath("public", s"public/$name")
+        s"/assets/$versionedJs"
+    }, name => getClass.getResource(s"/public/$name") != null)
   </body>
 </html>

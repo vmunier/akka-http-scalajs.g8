@@ -12,8 +12,8 @@ lazy val server = project
     // triggers scalaJSPipeline when using compile or continuous compilation
     Compile / compile := ((Compile / compile) dependsOn scalaJSPipeline).value,
     libraryDependencies ++= Seq(
-      "com.typesafe.akka" %% "akka-http" % "10.2.9",
-      "com.typesafe.akka" %% "akka-stream" % "2.6.19",
+      "com.typesafe.akka" %% "akka-http" % "10.5.2",
+      "com.typesafe.akka" %% "akka-stream" % "2.8.5",
       "com.vmunier" %% "scalajs-scripts" % "1.2.0"
     ),
     Assets / WebKeys.packagePrefix := "public/",
@@ -25,7 +25,7 @@ lazy val server = project
 lazy val client = project
   .settings(
     scalaJSUseMainModuleInitializer := true,
-    libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.1.0"
+    libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.6.0"
   )
   .enablePlugins(ScalaJSPlugin, ScalaJSWeb)
   .dependsOn(shared.js)

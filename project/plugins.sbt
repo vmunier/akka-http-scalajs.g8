@@ -4,7 +4,7 @@ addSbtPlugin("org.foundweekends.giter8" % "sbt-giter8" % "0.16.2")
 libraryDependencies += { "org.scala-sbt" %% "scripted-plugin" % sbtVersion.value }
 
 // add the below dependencies in the template build, so that Scala Steward can update versions in the giter8 template
-addSbtPlugin("com.vmunier"               % "sbt-web-scalajs"           % "1.2.0")
+addSbtPlugin("com.vmunier"               % "sbt-web-scalajs"           % "1.3.0")
 addSbtPlugin("org.scala-js"              % "sbt-scalajs"               % "1.13.2")
 addSbtPlugin("io.spray"                  % "sbt-revolver"              % "0.10.0")
 addSbtPlugin("com.eed3si9n"              % "sbt-assembly"              % "2.1.3")

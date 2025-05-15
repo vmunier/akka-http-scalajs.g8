@@ -1,5 +1,5 @@
 ThisBuild / organization := "$organization$"
-ThisBuild / scalaVersion := "2.13.7"
+ThisBuild / scalaVersion := "2.13.16"
 ThisBuild / version      := "0.1.0-SNAPSHOT"
 
 lazy val root = (project in file("."))
@@ -13,8 +13,8 @@ lazy val server = project
     Compile / compile := ((Compile / compile) dependsOn scalaJSPipeline).value,
     resolvers += "Akka library repository".at("https://repo.akka.io/maven"),
     libraryDependencies ++= Seq(
-      "com.typesafe.akka" %% "akka-http" % "10.6.0",
-      "com.typesafe.akka" %% "akka-stream" % "2.9.0",
+      "com.typesafe.akka" %% "akka-http" % "10.7.0",
+      "com.typesafe.akka" %% "akka-stream" % "2.10.5",
       "com.vmunier" %% "scalajs-scripts" % "1.3.0"
     ),
     Assets / WebKeys.packagePrefix := "public/",

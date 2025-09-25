@@ -1,5 +1,5 @@
 // needed for the tests (ci/checksourcemaps.sh)
-addSbtPlugin("org.foundweekends.giter8" % "sbt-giter8" % "0.16.2")
+addSbtPlugin("org.foundweekends.giter8" % "sbt-giter8" % "0.18.0")
 
 // add the below dependencies in the template build, so that Scala Steward can update versions in the giter8 template
 addSbtPlugin("com.vmunier"               % "sbt-web-scalajs"           % "1.3.0")

@@ -1,6 +1,6 @@
 name := "akka-http-scalajs.g8"
 
-scalaVersion := "2.13.15"
+scalaVersion := "2.13.17"
 
 enablePlugins(ScriptedPlugin)
 
